@@ -1,0 +1,77 @@
+class Solution {
+public:
+
+    set<vector<int>> s;
+
+    void getAllCombination(vector<int>& candidates, int i, vector<int> &combin, vector<vector<int>> &ans,  int tarr){
+        if(i == candidates.size() || tarr < 0){
+            return;
+        }
+        if(tarr == 0 ){
+            if(s.find(combin) == s.end()){
+                ans.push_back(combin);
+                s.insert(combin);
+            }
+            
+            return;
+        }
+
+
+
+        combin.push_back(candidates[i]);
+        
+        //single
+        getAllCombination(candidates,i+1,combin, ans,tarr-candidates[i]);
+        //multiple
+        getAllCombination(candidates,i,combin,ans,tarr-candidates[i]);
+        //backtrack
+        combin.pop_back();
+        //exclude
+        getAllCombination(candidates,i,combin,ans,tarr);
+
+
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> combin;
+
+        getAllCombination(candidates,0,combin,ans,target);
+
+        return ans;
+
+    }
+};
+
+
+
+chatgpt--
+class Solution {
+public:
+
+    void getAllCombination(vector<int>& candidates, int i, vector<int> &combin, vector<vector<int>> &ans, int tarr) {
+        if (tarr == 0) {
+            ans.push_back(combin);
+            return;
+        }
+        if (tarr < 0 || i == candidates.size()) return;
+
+        // Pick the current number (stay at same i for multiple use)
+        combin.push_back(candidates[i]);
+        getAllCombination(candidates, i, combin, ans, tarr - candidates[i]);
+        combin.pop_back();
+
+        // Skip the current number (move to next i)
+        getAllCombination(candidates, i + 1, combin, ans, tarr);
+    }
+
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> ans;
+        vector<int> combin;
+
+        getAllCombination(candidates,0,combin,ans,target);
+
+        return ans;
+
+    }
+};
