@@ -30,6 +30,18 @@ int lis(vector<int> arr){
     return dp[n][m];
 }
 
+int lis2(vector<int> arr, int n, int m, vector<vector<int>>&dp){
+    if(n == 0 || m == 0) return 0;
+
+    if(dp[n][m] != -1) return dp[n][m];
+
+    if(arr[n-1] == arr[m-1]){
+        return dp[n][m] = lis2(arr, n-1, m-1, dp) + 1;
+    }else{
+        return dp[n][m] = max(lis2(arr, n-1, m, dp), lis2(arr, n, m-1, dp));
+    }
+}
+
 int main(){
     vector<int> arr = {50,3,10,7,40,80};
 
