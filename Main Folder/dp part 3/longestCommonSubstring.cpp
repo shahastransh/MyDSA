@@ -25,6 +25,18 @@ int lcSubstringTab(string str1, string str2){
 
 }
 
+int lcSubstringRec(string str1, string str2, int n, int m, int count){
+    if(n == 0 || m == 0) return count;
+
+    if(str1[n-1] == str2[m-1]){
+        count = lcSubstringRec(str1,str2,n-1,m-1,count+1);
+    }
+
+    count = max(count, max(lcSubstringRec(str1,str2,n,m-1,0), lcSubstringRec(str1,str2,n-1,m,0)));
+
+    return count;
+}
+
 
 int main(){
     string str1 = "abcdge";
@@ -33,7 +45,8 @@ int main(){
     int m = str2.size();
 
     
-    cout << lcSubstringTab(str1,str2);
+    cout << lcSubstringTab(str1,str2) << "\n";
+    cout << lcSubstringRec(str1,str2,n,m,0) << "\n";
     
     return 0;
 }

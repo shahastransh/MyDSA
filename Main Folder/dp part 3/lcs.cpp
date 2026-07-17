@@ -38,8 +38,8 @@ int lcsMEM(string str1, string str2,vector<vector<int>> dp){
         return dp[n][m];
     }
     if(str1[n-1] == str2[m-1]){
-     
-    }else{   dp[n][m] = lcsMEM(str1.substr(0,n-1), str2.substr(0,m-1),dp) + 1;
+        dp[n][m] = lcsMEM(str1.substr(0,n-1), str2.substr(0,m-1),dp) + 1;
+    }else{   
         int ans1 = lcsMEM(str1.substr(0,n-1), str2,dp);
         int ans2 = lcsMEM(str1, str2.substr(0,m-1),dp);
         dp[n][m] = max(ans1,ans2);

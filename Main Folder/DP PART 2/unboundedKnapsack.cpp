@@ -45,6 +45,6 @@ int main(){
     int n = 5;
     vector<vector<int>>dp(n+1,vector<int>(W+1,-1));
     cout << unbounded_Knapsack(val,wt,W,n) << "\n";
-    cout << unbounded_Knapsack2(dp,val,wt,W,n);
+    cout << unbounded_Knapsack2(dp,val,wt,W,n) << "\n";
     return 0;
 }
