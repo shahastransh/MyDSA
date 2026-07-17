@@ -22,13 +22,29 @@ int unbounded_Knapsack(vector<int> val, vector<int> wt, int W, int n){
 
     return dp[n][W];
 }
+int unbounded_Knapsack2(vector<vector<int>>&dp, vector<int> val, vector<int>wt,int W,int n){
+    if(n == 0 || W == 0) return 0;
+
+    int itemwt = wt[n-1];
+    int itemVal = val[n-1];
+    if(dp[n][W] != -1) return dp[n][W];
+    if(itemwt <= W){
+        int ans1 = itemVal + unbounded_Knapsack2(dp, val, wt, W- itemwt, n);
+        int ans2 = unbounded_Knapsack2(dp, val, wt, W, n-1);
+        return dp[n][W] = max(ans1,ans2);
+    }else{
+        return dp[n][W] = unbounded_Knapsack2(dp, val, wt, W, n-1);
+    }
+}
+
 
 int main(){
     vector<int> val = {15,14,10,45,30};
     vector<int> wt = {2,5,1,3,4};
     int W = 7;
     int n = 5;
-
-    cout << unbounded_Knapsack(val,wt,W,n);
+    vector<vector<int>>dp(n+1,vector<int>(W+1,-1));
+    cout << unbounded_Knapsack(val,wt,W,n) << "\n";
+    cout << unbounded_Knapsack2(dp,val,wt,W,n);
     return 0;
 }
