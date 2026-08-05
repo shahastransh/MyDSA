@@ -169,6 +169,7 @@ pair<int,int> diam2(Node* root ){
 
     return make_pair(finalDiam,finalHt);
 }
+
 bool isIdentical(Node* root1, Node* root2){
     if(root1 == NULL && root2 == NULL){
         return true;
